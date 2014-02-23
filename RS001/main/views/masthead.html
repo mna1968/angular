@@ -1,0 +1,41 @@
+<div class="navbar-inner">
+    <div class="container">
+
+        <a class="brand" href><span class="ge-logo"></span> <span>{{appName}}<small><i>powered by</i> GE</small></span></a>
+
+        <div class="pull-right" ng-show="showMenu">
+            <div class="btn-toolbar pull-left">
+                <div class="btn-group">
+                    <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" style="margin-right:10px;"><i class="icon-th-large"></i><i class="icon-chevron-down"></i></button>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href ng-click="switchApplication('CVT')">Customer Value Tool</a></li>
+                        <li><a href ng-click="switchApplication('MLA')">MLA</a></li>
+                    </ul>
+                </div>
+
+                <div class="btn-group" style="margin-right:0px;">
+                <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i><span class="user-name">Betz</span> <i class="icon-chevron-down"></i></button>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="/documentation/html/BETZ_Online_Help.htm" target="_blank">Help</a></li>
+                        <li><a href="/#/">Logout</a></li>
+                    </ul>
+              </div>
+            </div>
+            <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-bar"></i>
+                <i class="icon-bar"></i>
+                <i class="icon-bar"></i>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Primary Navbar -->
+    <div class="primary-navbar nav-collapse">
+        <div class="container">
+            <ul class="nav" ng-show="showMenu">
+                <li ng-repeat="tab in primaryNav" ng-class="{ active: activeRoute==tab.route }"><a href="#{{tab.route}}"> {{tab.label}} </a></li>
+            </ul>
+        </div>
+    </div>
+</div>

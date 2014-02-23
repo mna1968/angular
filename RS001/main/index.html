@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <meta charset="utf-8">
+    <title>JS Bin</title>
+</head>
+<body>
+
+<div id="mastHead" class="navbar navbar-static-top" ng-controller="MastheadCtrl" ng-include data-src="navTemplateUrl">
+</div>
+
+<div ng-view></div>
+
+
+<script src="lib/requirejs/require.js"></script>
+<script src="lib/require.config.js"></script>
+
+<script src="lib/jquery/jquery.min.js"></script>
+<script src="lib/angular/angular.js"></script>
+
+<script src="lib/angular-route/angular-route.js"></script>
+<script src="lib/angular-resource/angular-resource.js"></script>
+<script src="lib/angular-cookies/angular-cookies.js"></script>
+<script src="lib/angular-sanitize/angular-sanitize.js"></script>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

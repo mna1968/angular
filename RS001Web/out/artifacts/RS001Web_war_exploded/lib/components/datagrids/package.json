@@ -1,0 +1,26 @@
+{
+  "name": "datagrids",
+  "author": "General Electric",
+  "description": "Customized implementation of DataTables for GE DS.",
+  "version": "0.8.5",
+  "private": true,
+  "homepage": "http://gesdh.com/",
+    "devDependencies": {
+        "grunt": ">=0.4.1",
+        "grunt-shell": ">=0.3.0",
+        "grunt-contrib-clean": ">=0.4.0",
+        "grunt-contrib-watch": ">=0.2.0",
+        "grunt-contrib-less": ">=0.6.1",
+        "grunt-contrib-jshint": ">=0.1.1",
+        "bower": "~1.2.4",
+        "http-server": ">=0.5.5",
+        "mocha": ">=1.15.0",
+        "chai": "~1.8.1",
+        "grunt-karma": "~0.6.2",
+        "karma-mocha": "~0.1",
+        "karma-requirejs": "~0.1.0",
+        "karma-sinon-chai": "~0.1",
+        "selenium-webdriver": ">=2.35.0",
+        "test-dependencies": "git+https://devcloud.sw.ge.com/source/scm/dt/test-dependencies.git#v0.9.0"
+    }
+}
