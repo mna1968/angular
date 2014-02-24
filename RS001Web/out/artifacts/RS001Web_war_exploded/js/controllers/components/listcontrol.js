@@ -8,10 +8,9 @@
 
 'use strict';
 angular.module('rs001')
-    .controller('listCtrl',function($scope,$rootScope){
+    .controller('listCtrl',['$scope','$rootScope',function($scope,$rootScope){
 
-
+//        stateSrv.setMasthead(true);
         $rootScope.$emit('showmasthead');
 
-
-    });
+    }]);

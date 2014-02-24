@@ -5,10 +5,11 @@ requirejs.config({
         'underscore'             : 'lib/underscore/underscore-min',
         'angular-bootstrap'      : 'lib/angular-bootstrap/ui-bootstrap-tpls.min',
         'angularSpinner'         : 'lib/angular-spinner/angular-spinner',
-        'MastheadCtrl'           :  'js/controllers/masthead',
-        'loginSrv'                : 'js/services/loginservice',
-        'LoginCtrl'               : 'js/controllers/login/login',
-        'listCtrl'                : 'js/controllers/components/listcontrol'
+        'stateSrv'               : 'js/services/stateservice',
+        'loginSrv'               : 'js/services/loginservice',
+        'MastheadCtrl'           : 'js/controllers/masthead',
+        'LoginCtrl'              : 'js/controllers/login/login',
+        'listCtrl'               : 'js/controllers/components/listcontrol'
 
 
 
@@ -23,8 +24,9 @@ requirejs.config({
 
 define([
     'jquery',
-    'MastheadCtrl',
+    'stateSrv',
     'loginSrv',
+    'MastheadCtrl',
     'LoginCtrl',
     'listCtrl'
 
