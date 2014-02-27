@@ -1,0 +1,11 @@
+<div class="navbar-inner">
+
+    <!-- Primary Navbar -->
+    <div class="primary-navbar nav-collapse">
+        <div class="container">
+            <ul class="nav">
+                <li ng-repeat="tab in primaryNav" ng-class="{ active: activeRoute==tab.route }"><a href="#{{tab.route}}">{{tab.label}}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
