@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03be5644-6bf5-4eba-9c40-6b63636f4508" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TicTacToeWeb.iml" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TicTacToeWeb.iml" afterPath="$PROJECT_DIR$/SampleWebApp.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../TicTacToe/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../TicTacToe/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="TicTacToeWeb.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="03be5644-6bf5-4eba-9c40-6b63636f4508" time="1393530568025" ignored="false" />
+    <file path="/Dummy.txt" changelist="03be5644-6bf5-4eba-9c40-6b63636f4508" time="1393548832291" ignored="false" />
     <file path="/masthead.js" changelist="03be5644-6bf5-4eba-9c40-6b63636f4508" time="1393306326042" ignored="false" />
     <file path="/airbnb.html" changelist="03be5644-6bf5-4eba-9c40-6b63636f4508" time="1393306516297" ignored="false" />
     <file path="/index.html" changelist="03be5644-6bf5-4eba-9c40-6b63636f4508" time="1393306582485" ignored="false" />
@@ -103,7 +104,7 @@
       <file leaf-file-name="airbnb.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/js/controllers/components/airbnb.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="42" selection-start="297" selection-end="297" vertical-scroll-proportion="0.23550725">
+            <state line="13" column="8" selection-start="297" selection-end="297" vertical-scroll-proportion="0.23550725">
               <folding />
             </state>
           </provider>
@@ -112,7 +113,7 @@
       <file leaf-file-name="masthead.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/js/controllers/masthead.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="53" selection-start="497" selection-end="497" vertical-scroll-proportion="0.0">
+            <state line="16" column="44" selection-start="497" selection-end="497" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -121,7 +122,7 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="37" selection-start="529" selection-end="529" vertical-scroll-proportion="-10.625">
+            <state line="17" column="37" selection-start="529" selection-end="529" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -130,7 +131,7 @@
       <file leaf-file-name="config.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/js/config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="40" selection-start="945" selection-end="945" vertical-scroll-proportion="0.0">
+            <state line="35" column="3" selection-start="945" selection-end="945" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -183,7 +184,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="20" />
-    <option name="y" value="36" />
+    <option name="y" value="22" />
     <option name="width" value="1660" />
     <option name="height" value="951" />
   </component>
@@ -215,8 +216,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -251,6 +250,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -267,8 +268,8 @@
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -288,6 +289,19 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -318,19 +332,6 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" />
@@ -353,13 +354,6 @@
       </JSRemoteDebuggerConfigurationSettings>
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Local" singleton="true">
-      <JSDebuggerConfigurationSettings>
-        <option name="engineId" />
-        <option name="fileUrl" />
-      </JSDebuggerConfigurationSettings>
-      <method />
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -379,6 +373,13 @@
       </option>
       <envs />
       <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local" singleton="true">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
       <method />
     </configuration>
     <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local">
@@ -504,7 +505,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="20" y="36" width="1660" height="951" extended-state="0" />
+    <frame x="20" y="22" width="1660" height="951" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -525,7 +526,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943925" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25903615" sideWeight="0.72897196" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26204818" sideWeight="0.72897196" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27102804" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -609,9 +610,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/controllers/components/tictactoe.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="71" selection-start="1682" selection-end="1682" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="57" column="71" selection-start="1682" selection-end="1682" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/controllers/masthead.js">
@@ -667,14 +666,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/controllers/masthead.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="53" selection-start="497" selection-end="497" vertical-scroll-proportion="0.0">
+        <state line="16" column="44" selection-start="497" selection-end="497" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="40" selection-start="945" selection-end="945" vertical-scroll-proportion="0.0">
+        <state line="35" column="3" selection-start="945" selection-end="945" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -702,21 +701,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/controllers/components/tictactoe.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="71" selection-start="1682" selection-end="1682" vertical-scroll-proportion="0.018115941">
-          <folding />
-        </state>
+        <state line="57" column="71" selection-start="1682" selection-end="1682" vertical-scroll-proportion="0.018115941" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="37" selection-start="529" selection-end="529" vertical-scroll-proportion="-10.625">
+        <state line="17" column="37" selection-start="529" selection-end="529" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/controllers/components/airbnb.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="42" selection-start="297" selection-end="297" vertical-scroll-proportion="0.23550725">
+        <state line="13" column="8" selection-start="297" selection-end="297" vertical-scroll-proportion="0.23550725">
           <folding />
         </state>
       </provider>
