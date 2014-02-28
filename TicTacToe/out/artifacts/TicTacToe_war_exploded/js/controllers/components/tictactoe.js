@@ -140,7 +140,7 @@ angular.module('rs001')
             var dim = $scope.players.getBoardDimension();
             var boardelements = $("#board").children();
             var success = "success";
-            var value =  $scope.players.getCurrentPlayer()=== 1?'X':'0';
+            var value =  $scope.players.getCurrentPlayer()=== 1?'X':'O';
 
             if($scope.checkHorizontals(boardelements,dim,value) === "success"){
                 return success;
@@ -159,7 +159,6 @@ angular.module('rs001')
         $scope.currentPlayer = $scope.players.getCurrentPlayer();
 
         $("#pone").addClass('font');
-        $("#pstatus").text("Player "+$scope.players.getCurrentPlayer() + " to play!");
 
         console.log($scope.currentPlayer);
 
@@ -170,7 +169,7 @@ angular.module('rs001')
                 if($scope.players.getCurrentPlayer() === $scope.players.getPlayerOne()){
                     obj.text('X');
                     if($scope.validateGame()=== "success"){
-                        $("#gstatus").text("Player "+$scope.players.getPlayerOne() + "wins!");
+                        $("#gstatus").text("Game Over!");
                     }else{
                         $scope.players.setCurrentPlayer($scope.players.getPlayerTwo());
                         $("#ptwo").addClass("font");
@@ -180,9 +179,9 @@ angular.module('rs001')
 
                 }else if($scope.players.getCurrentPlayer() === $scope.players.getPlayerTwo()){
 
-                    obj.text('0');
+                    obj.text('O');
                     if($scope.validateGame()=== "success"){
-                        $("#gstatus").text("Player "+$scope.players.getPlayerTwo() + "wins!");
+                        $("#gstatus").text("Gave OVer!");
                     }else{
                         $scope.players.setCurrentPlayer($scope.players.getPlayerOne());
                         $("#pone").addClass("font");
@@ -191,7 +190,6 @@ angular.module('rs001')
                     }
                 }
             }
-            $("#pstatus").text("Player "+$scope.players.getCurrentPlayer() + " to play!");
 
         };
 
@@ -204,10 +202,10 @@ angular.module('rs001')
             else {
 
                 var board = angular.element('#board');
-                var boardWidth = num *(35+4);
+//                var boardWidth = num *(35+4);
 
                 console.log(board.width());
-                board.width(boardWidth);
+//                board.width(boardWidth);
 
                 for(var row =0; row < num; row++){
 
@@ -234,7 +232,6 @@ angular.module('rs001')
             }
             $("#gstatus").text("");
             $scope.players.setCurrentPlayer($scope.players.getPlayerOne());
-            $("#pstatus").text("Player "+$scope.players.getCurrentPlayer() + " to play!");
             $("#pone").addClass("font");
             $("#ptwo").removeClass("font");
 

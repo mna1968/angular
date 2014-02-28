@@ -1,3 +1,4 @@
+
 .logincontainer{
     width:100%;
     height: 100%;
@@ -39,37 +40,119 @@
 }
 
 
-.boardcontainer{
 
-    width:100px;
-    display:inline-block;
-    border:1px solid #008000;
-
-}
-.boardcontainerparent{
-    padding: 5px;
-    display:inline-block;
-    border:1px solid blue;
-    vertical-align:middle;
-}
-#pstatus{
-    position:relative;
-    margin-left:10px;
-    display:inline-block;
+.appcontentview{
+    width:100%;
+    height: 85%;
 }
 
-.childDiv{
-    position:relative;
-    display:inline-block;
+.tictactoe{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin-top: 50px;
+}
 
+@media all and (min-width: 769px),all and (max-width: 1680px) {
+
+    #board{
+        width:180px;
+    }
+    .boardcontainer{
+
+        width:190px;
+        display:inline-block;
+        border:1px solid #008000;
+
+    }
+    .boardcontainerparent{
+        padding: 5px;
+        display:inline-block;
+        border:1px solid blue;
+        vertical-align:middle;
+    }
+    #pstatus{
+        position:relative;
+        margin-left:10px;
+        display:inline-block;
+    }
+
+    .childDiv{
+        position:relative;
+        display:inline-block;
+
+
+    }
+    .btndimensions{
+        width:55px;
+        height:30px;
+        margin:2px;
+
+    }
+    .font{
+        font-weight:bold;
+    }
 
 }
-.btndimensions{
-    width:35px;
-    height:30px;
-    margin:2px;
+@media all and (max-width: 768px){
+
+    #board{
+        width:140px;
+    }
+    .boardcontainer{
+
+        width:150px;
+        display:inline-block;
+        border:1px solid #008000;
+
+    }
+
+    .btndimensions{
+        width:35px;
+        height:30px;
+        margin:2px;
+
+    }
 
 }
-.font{
-    font-weight:bold;
+
+
+@media screen and (max-width: 480px),(orientation:landscape){
+
+    #board{
+        width:100px;
+    }
+    .boardcontainer{
+        width:110px;
+        display:inline-block;
+        border:1px solid #008000;
+
+    }
+    .btndimensions{
+        width:25px;
+        height:20px;
+        padding: 0px;
+        margin:2px;
+
+    }
+
+    @media all and (orientation:landscape){
+
+        #board{
+            width:150px;
+        }
+        .boardcontainer{
+            width:110px;
+            display:inline-block;
+            border:1px solid #008000;
+
+        }
+        .btndimensions{
+            width:38px;
+            height:20px;
+            margin:2px;
+
+        }
+    }
+
 }
