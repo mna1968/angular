@@ -43,10 +43,11 @@
 
     width:100px;
     display:inline-block;
-    border:1px solid red;
+    border:1px solid #008000;
 
 }
 .boardcontainerparent{
+    padding: 5px;
     display:inline-block;
     border:1px solid blue;
     vertical-align:middle;
@@ -55,11 +56,9 @@
     position:relative;
     margin-left:10px;
     display:inline-block;
-    border:1px solid red;
 }
 
 .childDiv{
-    border:1px solid red;
     position:relative;
     display:inline-block;
 

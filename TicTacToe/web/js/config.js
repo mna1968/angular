@@ -5,11 +5,8 @@ requirejs.config({
         'underscore'             : 'lib/underscore/underscore-min',
         'angular-bootstrap'      : 'lib/angular-bootstrap/ui-bootstrap-tpls.min',
         'angularSpinner'         : 'lib/angular-spinner/angular-spinner',
-        'stateSrv'               : 'js/services/stateservice',
-        'loginSrv'               : 'js/services/loginservice',
         'MastheadCtrl'           : 'js/controllers/masthead',
-        'tictactoeCtrl'               : 'js/controllers/components/tictactoe',
-        'airbnbCtrl'               : 'js/controllers/components/airbnb'
+        'tictactoeCtrl'               : 'js/controllers/components/tictactoe'
 
 
 
@@ -24,11 +21,8 @@ requirejs.config({
 
 define([
     'jquery',
-    'stateSrv',
-    'loginSrv',
     'MastheadCtrl',
-    'tictactoeCtrl',
-    'airbnbCtrl'
+    'tictactoeCtrl'
 
 
 ], function(){

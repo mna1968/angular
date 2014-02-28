@@ -44,96 +44,116 @@ angular.module('rs001')
         })();
 
 
-        $scope.validateGame=function(){
+        $scope.checkHorizontals=function(elements, dim, value){
 
-            var dim = $scope.players.getBoardDimension();
-            var boardelements = $("#board").children();
-            var success = "success";
-            var line = true;
-
-
-            for(var i =0; i < dim; i++){
-
-                if($(boardelements[i]).text().trim()==='X'){
-                    line = true;
-                    var temp = i;
-                    var index = dim;
-                    while(temp < dim-1){
-                        if($(boardelements[index]).text().trim() !='X'){
-                            success = "";
-                            temp = dim;
-                        }
-                        index = index+dim;
-                        temp++;
+            for(var row = 0; row < dim; row++){
+                var i =row*dim;
+                var success = "success";
+                var temp = 0;
+                while(temp < dim){
+                    if($(elements[i]).text().trim() != value){
+                        success = "";
+                        temp = dim;
                     }
-                    if(success === "success"){
-                         break;
-                    }
-
-                    if(i===0 || i === dim-1){
-
-                        success="success";
-                        temp = i;
-                        index = 0;
-                        while(temp < dim-1){
-                            index = index+dim+1;
-                            if($(boardelements[index]).text().trim() !='X'){
-                                success = "";
-                                temp = dim;
-                            }
-                            index = index+dim;
-                            temp++;
-                        }
-                    }
-                    if(success === "success"){
-                        break;
-                    }
-
-                }else if($(boardelements[i]).text().trim()==='0'){
-                    line = true;
-                    var temp = i;
-                    var index = dim;
-                    while(temp < dim-1){
-                        if($(boardelements[index]).text().trim() !='0'){
-                            success = "";
-                            temp = dim;
-                        }
-                        index = index+dim;
-                        temp++;
-                    }
-                    if(success === "success"){
-                        break;
-                    }
-
-                    if(i===0 || i === dim-1){
-
-                        success="success";
-                        temp = i;
-                        index = 0;
-                        while(temp < dim-1){
-                            index = index+dim+1;
-                            if($(boardelements[index]).text().trim() !='0'){
-                                success = "";
-                                temp = dim;
-                            }
-                            index = index+dim;
-                            temp++;
-                        }
-                    }
-                    if(success === "success"){
-                        break;
-                    }
-
+                    i++;
+                    temp++;
                 }
-            }
-            if(line === true){
-                success = "success";
+                if(success === "success"){
+                    break;
+                }
             }
 
             return success;
 
         }
 
+        $scope.checkVerticals=function(elements, dim, value){
+
+            for(var col = 0; col < dim;col++){
+                var i =col;
+                var success = "success";
+                var temp = 0;
+                while(temp < dim){
+                    if($(elements[i]).text().trim() != value){
+                        success = "";
+                        temp = dim;
+                    }
+                    i=i+dim;
+                    temp++;
+                }
+                if(success === "success"){
+                    break;
+                }
+            }
+
+            return success;
+
+
+        }
+
+        $scope.checkDiagonals=function(elements, dim, value){
+
+            for(var dia = 0; dia < 2;dia++){
+                var i =dia;
+                var matrixSize = dim*dim;
+
+                if(i === 0){
+
+                    var success = "success";
+                    while(i < matrixSize){
+                        if($(elements[i]).text().trim() != value){
+                            success = "";
+                            i =matrixSize;
+                        }
+                        i=i+dim+1;
+                    }
+                    if(success === "success"){
+                        break;
+                    }
+                }else{
+                    i = dim-1;
+                    var success = "success";
+                    var temp =0;
+                    while(temp < dim){
+                        if($(elements[i]).text().trim() != value){
+                            success = "";
+                            temp = dim;
+                        }
+                        i=i+dim-1;
+                        temp++;
+                    }
+                    if(success === "success"){
+                        break;
+                    }
+
+                }
+
+            }
+
+            return success;
+
+        }
+
+
+        $scope.validateGame=function(){
+
+            var dim = $scope.players.getBoardDimension();
+            var boardelements = $("#board").children();
+            var success = "success";
+            var value =  $scope.players.getCurrentPlayer()=== 1?'X':'0';
+
+            if($scope.checkHorizontals(boardelements,dim,value) === "success"){
+                return success;
+            }else if($scope.checkVerticals(boardelements,dim,value) === "success"){
+                return success;
+            }else if($scope.checkDiagonals(boardelements,dim,value) === "success"){
+                return success;
+            }else{
+                success = "";
+            }
+            return success;
+
+        }
 
 
         $scope.currentPlayer = $scope.players.getCurrentPlayer();
@@ -197,14 +217,26 @@ angular.module('rs001')
                         board.append(btnObj);
                         $compile(btnObj)($scope);
 
-
                     }
-
 
                 }
 
-
             }
+
+
+        }
+
+        $scope.reset = function(){
+
+            var boardelements = $("#board").children();
+            for(var i = 0; i < boardelements.length; i++){
+                $(boardelements[i]).text("");
+            }
+            $("#gstatus").text("");
+            $scope.players.setCurrentPlayer($scope.players.getPlayerOne());
+            $("#pstatus").text("Player "+$scope.players.getCurrentPlayer() + " to play!");
+            $("#pone").addClass("font");
+            $("#ptwo").removeClass("font");
 
 
         }
