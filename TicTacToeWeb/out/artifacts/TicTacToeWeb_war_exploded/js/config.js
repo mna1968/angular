@@ -7,6 +7,7 @@ requirejs.config({
         'angularSpinner'         : 'lib/angular-spinner/angular-spinner',
         'stateSrv'               : 'js/services/stateservice',
         'loginSrv'               : 'js/services/loginservice',
+        'airbnbSrv'               : 'js/services/airbnb',
         'MastheadCtrl'           : 'js/controllers/masthead',
         'tictactoeCtrl'               : 'js/controllers/components/tictactoe',
         'airbnbCtrl'               : 'js/controllers/components/airbnb'
@@ -26,6 +27,7 @@ define([
     'jquery',
     'stateSrv',
     'loginSrv',
+    'airbnbSrv',
     'MastheadCtrl',
     'tictactoeCtrl',
     'airbnbCtrl'

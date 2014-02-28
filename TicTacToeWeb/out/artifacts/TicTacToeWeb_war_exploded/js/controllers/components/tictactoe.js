@@ -8,715 +8,254 @@
 
 'use strict';
 angular.module('rs001')
-    .controller('tictactoeCtrl',['$scope','$rootScope',function($scope,$rootScope){
+    .controller('tictactoeCtrl',['$scope','$rootScope','$compile',function($scope,$rootScope,$compile){
 
 
-//if IE4/NS6, apply style
-//        if (document.all||document.getElementById){
-//            document.write('<style>.tictac{')
-//            document.write('width:50px;height:50px;')
-//            document.write('}</style>')
-//        }
+        $scope.players = (function(){
 
-        $scope.sqr1
-        $scope.sqr2
-        $scope.sqr3
-        $scope.sqr4
-        $scope.sqr5
-        $scope.sqr6
-        $scope.sqr7
-        $scope.sqr8
-        $scope.sqr9
-        $scope.sqr1T = 0
-        $scope.sqr2T = 0
-        $scope.sqr3T = 0
-        $scope.sqr4T = 0
-        $scope.sqr5T = 0
-        $scope.sqr6T = 0
-        $scope.sqr7T = 0
-        $scope.sqr8T = 0
-        $scope.sqr9T = 0
-        $scope.moveCount = 0
-        $scope.turn = 0
-        $scope.mode = 1
+            var playerone=1;
+            var playertwo=2;
+            var currentPlayer = playerone;
+            var boardDimension;
+
+            return {
+
+                getPlayerOne:function(){
+                    return playerone;
+                },
+                getPlayerTwo:function(){
+                    return playertwo;
+                },
+                setCurrentPlayer:function(player){
+                    currentPlayer = player;
+                },
+                getCurrentPlayer:function(){
+                    return currentPlayer;
+                },
+                setBoardDimension:function(num){
+                    boardDimension = num;
+                },
+                getBoardDimension:function(){
+                    return boardDimension;
+                }
+
+            };
+
+        })();
 
 
-        $scope.onformitemClick=function(e){
+        $scope.checkHorizontals=function(elements, dim, value){
 
-            $scope.currentElement = e.currentTarget;
-            alert($scope.currentElement.name);
-            if($scope.currentElement.value == '     ' && $scope.turn == 0 && $scope.mode == 1)
-            {
-                document.tic.sqr1.value = ' X ';
-                $scope.sqr1T = 1;
-                $scope.turn = 1;
-                $scope.vari();
-                $scope.check();
+            for(var row = 0; row < dim; row++){
+                var i =row*dim;
+                var success = "success";
+                var temp = 0;
+                while(temp < dim){
+                    if($(elements[i]).text().trim() != value){
+                        success = "";
+                        temp = dim;
+                    }
+                    i++;
+                    temp++;
+                }
+                if(success === "success"){
+                    break;
+                }
             }
-            else if($scope.currentElement.value == '     ' && $scope.turn == 1 && $scope.mode == 2)
-            {
-                document.tic.sqr1.value = ' X ';
-                $scope.sqr1T = 1;
-                $scope.turn = 0;
-                $scope.vari();
-                $scope.player1Check()
-            } else if($scope.currentElement.value == '     ' && $scope.turn == 0 && $scope.mode == 2)
-            {
-                currentElement.value = ' O ';
-                $scope.sqr1T = 1;
-                $scope.turn = 1;
-                $scope.vari();
-                $scope.player1Check()
+
+            return success;
+
+        }
+
+        $scope.checkVerticals=function(elements, dim, value){
+
+            for(var col = 0; col < dim;col++){
+                var i =col;
+                var success = "success";
+                var temp = 0;
+                while(temp < dim){
+                    if($(elements[i]).text().trim() != value){
+                        success = "";
+                        temp = dim;
+                    }
+                    i=i+dim;
+                    temp++;
+                }
+                if(success === "success"){
+                    break;
+                }
             }
-            $scope.drawCheck();
+
+            return success;
+
+
+        }
+
+        $scope.checkDiagonals=function(elements, dim, value){
+
+            for(var dia = 0; dia < 2;dia++){
+                var i =dia;
+                var matrixSize = dim*dim;
+
+                if(i === 0){
+
+                    var success = "success";
+                    while(i < matrixSize){
+                        if($(elements[i]).text().trim() != value){
+                            success = "";
+                            i =matrixSize;
+                        }
+                        i=i+dim+1;
+                    }
+                    if(success === "success"){
+                        break;
+                    }
+                }else{
+                    i = dim-1;
+                    var success = "success";
+                    var temp =0;
+                    while(temp < dim){
+                        if($(elements[i]).text().trim() != value){
+                            success = "";
+                            temp = dim;
+                        }
+                        i=i+dim-1;
+                        temp++;
+                    }
+                    if(success === "success"){
+                        break;
+                    }
+
+                }
+
+            }
+
+            return success;
 
         }
 
 
+        $scope.validateGame=function(){
+
+            var dim = $scope.players.getBoardDimension();
+            var boardelements = $("#board").children();
+            var success = "success";
+            var value =  $scope.players.getCurrentPlayer()=== 1?'X':'O';
+
+            if($scope.checkHorizontals(boardelements,dim,value) === "success"){
+                return success;
+            }else if($scope.checkVerticals(boardelements,dim,value) === "success"){
+                return success;
+            }else if($scope.checkDiagonals(boardelements,dim,value) === "success"){
+                return success;
+            }else{
+                success = "";
+                var boardlength = dim*dim;
+                var hasValue = true;
+                for(var i = 0; i < boardlength; i++){
+                    if($(boardelements[i]).text().trim() === ""){
+                        hasValue = false;
+                    }
+                }
+                if(hasValue === true){
+                    success = "draw";
+                }
+
+            }
+
+            return success;
+
+        }
 
 
-        $scope.vari =function()
-        {
-            $scope.sqr1 = document.tic.sqr1.value
-            $scope.sqr2 = document.tic.sqr2.value
-            $scope.sqr3 = document.tic.sqr3.value
-            $scope.sqr4 = document.tic.sqr4.value
-            $scope.sqr5 = document.tic.sqr5.value
-            $scope.sqr6 = document.tic.sqr6.value
-            $scope.sqr7 = document.tic.sqr7.value
-            $scope.sqr8 = document.tic.sqr8.value
-            $scope.sqr9 = document.tic.sqr9.value
-        }
-        $scope.check=function()
-        {
-            if($scope.sqr1 == " X " && $scope.sqr2 == " X " && $scope.sqr3 == " X ")
-            {
-                alert("You Win!")
-                $scope.reset()
+        $scope.currentPlayer = $scope.players.getCurrentPlayer();
+
+        $("#pone").addClass('font');
+
+        console.log($scope.currentPlayer);
+
+
+        $scope.onClickHndlr=function(e){
+            var obj = $(e.currentTarget);
+            if($("#gstatus").text().trim() === ""){
+                if($scope.players.getCurrentPlayer() === $scope.players.getPlayerOne()){
+                    obj.text('X');
+                    if($scope.validateGame()=== "success"){
+                        $("#gstatus").text("Wnner: Player A!");
+                    }else if($scope.validateGame()=== "draw"){
+                        $("#gstatus").text("Draw!!");
+                    }else{
+                        $scope.players.setCurrentPlayer($scope.players.getPlayerTwo());
+                        $("#ptwo").addClass("font");
+                        $("#pone").removeClass("font");
+
+                    }
+
+                }else if($scope.players.getCurrentPlayer() === $scope.players.getPlayerTwo()){
+
+                    obj.text('O');
+                    if($scope.validateGame()=== "success"){
+                        $("#gstatus").text("Winner: Player B!");
+                    }else if($scope.validateGame()=== "draw"){
+                        $("#gstatus").text("Draw!!");
+                    }else{
+                        $scope.players.setCurrentPlayer($scope.players.getPlayerOne());
+                        $("#pone").addClass("font");
+                        $("#ptwo").removeClass("font");
+
+                    }
+                }
             }
-            else if($scope.sqr4 == " X " && $scope.sqr5 == " X " && $scope.sqr6 == " X ")
-            {
-                alert("You Win!")
-                $scope.reset()
+
+        };
+
+        $scope.prepareBoard=function(num){
+            $scope.players.setBoardDimension(num);
+
+            if(num === 1 ){
+                console.log("Cannot play the game with one box. Please enter more than one");
             }
-            else if($scope.sqr7 == " X " && $scope.sqr8 == " X " && $scope.sqr9 == " X ")
-            {
-                alert("You Win!")
-                $scope.reset()
+            else {
+
+                var board = angular.element('#board');
+//                var boardWidth = num *(35+4);
+
+                console.log(board.width());
+//                board.width(boardWidth);
+
+                for(var row =0; row < num; row++){
+
+                    for(var col=0; col < num; col++){
+
+                        var btnObj = angular.element("<button class='btn btn-default btndimensions' ng-click='onClickHndlr($event)'></button>");
+                        board.append(btnObj);
+                        $compile(btnObj)($scope);
+
+                    }
+
+                }
+
             }
-            else if($scope.sqr1 == " X " && $scope.sqr5 == " X " && $scope.sqr9 == " X ")
-            {
-                alert("You Win!")
-                $scope.reset()
-            }
-            else if($scope.sqr1 == " X " && $scope.sqr4 == " X " && $scope.sqr7 == " X ")
-            {
-                alert("You Win!")
-                $scope.reset()
-            }
-            else if($scope.sqr2 == " X " && $scope.sqr5 == " X " && $scope.sqr8 == " X ")
-            {
-                alert("You Win!")
-                $scope.reset()
-            }
-            else if($scope.sqr3 == " X " && $scope.sqr6 == " X " && $scope.sqr9 == " X ")
-            {
-                alert("You Win!")
-                $scope.reset()
-            }
-            else if($scope.sqr1 == " X " && $scope.sqr5 == " X " && $scope.sqr9 == " X ")
-            {
-                alert("You Win!")
-                $scope.reset()
-            }
-            else if($scope.sqr3 == " X " && $scope.sqr5 == " X " && $scope.sqr7 == " X ")
-            {
-                alert("You Win!")
-                $scope.reset()
-            }
-            else
-            {
-                $scope.winCheck()
-                $scope.check2()
-                $scope.drawCheck()
-            }
+
+
         }
 
-        $scope.check2= function()
-        {
-            $scope.vari()
-            $scope.drawCheck()
-            if($scope.sqr1 == " O " && $scope.sqr2 == " O " && $scope.sqr3 == " O ")
-            {
-                alert("You Lose!")
-                $scope.reset()
+        $scope.reset = function(){
+
+            var boardelements = $("#board").children();
+            for(var i = 0; i < boardelements.length; i++){
+                $(boardelements[i]).text("");
             }
-            else if($scope.sqr4 == " O " && $scope.sqr5 == " O " && $scope.sqr6 == " O ")
-            {
-                alert("You Lose!")
-                $scope.reset()
-            }
-            else if($scope.sqr7 == " O " && $scope.sqr8 == " O " && $scope.sqr9 == " O ")
-            {
-                alert("You Lose!")
-                $scope.reset()
-            }
-            else if($scope.sqr1 == " O " && $scope.sqr5 == " O " && $scope.sqr9 == " O ")
-            {
-                alert("You Lose!")
-                $scope.reset()
-            }
-            else if($scope.sqr1 == " O " && $scope.sqr4 == " O " && $scope.sqr7 == " O ")
-            {
-                alert("You Lose!")
-                $scope.reset()
-            }
-            else if($scope.sqr2 == " O " && $scope.sqr5 == " O " && $scope.sqr8 == " O ")
-            {
-                alert("You Lose!")
-                $scope.reset()
-            }
-            else if($scope.sqr3 == " O " && $scope.sqr6 == " O " && $scope.sqr9 == " O ")
-            {
-                alert("You Lose!")
-                $scope.reset()
-            }
-            else if($scope.sqr1 == " O " && $scope.sqr5 == " O " && $scope.sqr9 == " O ")
-            {
-                alert("You Lose!")
-                $scope.reset()
-            }
-            else if($scope.sqr3 == " O " && $scope.sqr5 == " O " && $scope.sqr7 == " O ")
-            {
-                alert("You Lose!")
-                $scope.reset()
-            }
+            $("#gstatus").text("");
+            $scope.players.setCurrentPlayer($scope.players.getPlayerOne());
+            $("#pone").addClass("font");
+            $("#ptwo").removeClass("font");
+
+
         }
 
-        $scope.player1Check=function()
-        {
-            if($scope.sqr1 == " X " && $scope.sqr2 == " X " && $scope.sqr3 == " X ")
-            {
-                alert("Player 1 wins!")
-                $scope.reset()
-            }
-            else if($scope.sqr4 == " X " && $scope.sqr5 == " X " && $scope.sqr6 == " X ")
-            {
-                alert("Player 1 wins!")
-                $scope.reset()
-            }
-            else if($scope.sqr7 == " X " && $scope.sqr8 == " X " && $scope.sqr9 == " X ")
-            {
-                alert("Player 1 wins!")
-                $scope.reset()
-            }
-            else if($scope.sqr1 == " X " && $scope.sqr5 == " X " && $scope.sqr9 == " X ")
-            {
-                alert("Player 1 wins!")
-                $scope.reset()
-            }
-            else if($scope.sqr1 == " X " && $scope.sqr4 == " X " && $scope.sqr7 == " X ")
-            {
-                alert("Player 1 wins!")
-                $scope.reset()
-            }
-            else if($scope.sqr2 == " X " && $scope.sqr5 == " X " && $scope.sqr8 == " X ")
-            {
-                alert("Player 1 wins!")
-                $scope.reset()
-            }
-            else if($scope.sqr3 == " X " && $scope.sqr6 == " X " && $scope.sqr9 == " X ")
-            {
-                alert("Player 1 wins!")
-                $scope.reset()
-            }
-            else if($scope.sqr1 == " X " && $scope.sqr5 == " X " && $scope.sqr9 == " X ")
-            {
-                alert("Player 1 wins!")
-                $scope.reset()
-            }
-            else if($scope.sqr3 == " X " && $scope.sqr5 == " X " && $scope.sqr7 == " X ")
-            {
-                alert("Player 1 wins!")
-                $scope.reset()
-            }
-            else
-            {
-                $scope.player2Check()
-                $scope.drawCheck()
-            }
-        }
 
-        $scope.player2Check=function()
-        {
-            $scope.vari()
-            $scope.drawCheck()
-            if($scope.sqr1 == " O " && $scope.sqr2 == " O " && $scope.sqr3 == " O ")
-            {
-                alert("Player 2 wins!")
-                $scope.reset()
-            }
-            else if($scope.sqr4 == " O " && $scope.sqr5 == " O " && $scope.sqr6 == " O ")
-            {
-                alert("Player 2 wins!")
-                $scope.reset()
-            }
-            else if($scope.sqr7 == " O " && $scope.sqr8 == " O " && $scope.sqr9 == " O ")
-            {
-                alert("Player 2 wins!")
-                $scope.reset()
-            }
-            else if($scope.sqr1 == " O " && $scope.sqr5 == " O " && $scope.sqr9 == " O ")
-            {
-                alert("Player 2 wins!")
-                $scope.reset()
-            }
-            else if($scope.sqr1 == " O " && $scope.sqr4 == " O " && $scope.sqr7 == " O ")
-            {
-                alert("Player 2 wins!")
-                $scope.reset()
-            }
-            else if($scope.sqr2 == " O " && $scope.sqr5 == " O " && $scope.sqr8 == " O ")
-            {
-                alert("Player 2 wins!")
-                $scope.reset()
-            }
-            else if($scope.sqr3 == " O " && $scope.sqr6 == " O " && $scope.sqr9 == " O ")
-            {
-                alert("Player 2 wins!")
-                $scope.reset()
-            }
-            else if($scope.sqr1 == " O " && $scope.sqr5 == " O " && $scope.sqr9 == " O ")
-            {
-                alert("Player 2 wins!")
-                $scope.reset()
-            }
-            else if($scope.sqr3 == " O " && $scope.sqr5 == " O " && $scope.sqr7 == " O ")
-            {
-                alert("Player 2 wins!")
-                $scope.reset()
-            }
-        }
-
-        $scope.drawCheck =function()
-        {
-            $scope.vari()
-            $scope.moveCount = $scope.sqr1T + $scope.sqr2T + $scope.sqr3T + $scope.sqr4T + $scope.sqr5T + $scope.sqr6T + $scope.sqr7T + $scope.sqr8T + $scope.sqr9T
-            if($scope.moveCount == 9)
-            {
-                $scope.reset()
-                alert("Draw")
-            }
-        }
-
-        $scope.winCheck=function()
-        {
-            $scope.check2()
-            if($scope.sqr1 == " O " && $scope.sqr2 == " O " && $scope.sqr3T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr3.value = " O "
-                $scope.sqr3T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr2 == " O " && $scope.sqr3 == " O " && $scope.sqr1T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr1.value = " O "
-                $scope.sqr1T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr4 == " O " && $scope.sqr5 == " O " && $scope.sqr6T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr6.value = " O "
-                $scope.sqr6T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr5 == " O " && $scope.sqr6 == " O " && $scope.sqr4T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr4.value = " O "
-                $scope.sqr4T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr7 == " O " && $scope.sqr8 == " O " && $scope.sqr9T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr9.value = " O "
-                $scope.sqr9T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr8 == " O " && $scope.sqr9 == " O " && $scope.sqr7T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr7.value = " O "
-                $scope.sqr7T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr1 == " O " && $scope.sqr5 == " O " && $scope.sqr9T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr9.value = " O "
-                $scope.sqr9T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr5 == " O " && $scope.sqr9 == " O " && $scope.sqr1T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr1.value = " O "
-                $scope.sqr1T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr3 == " O " && $scope.sqr5 == " O " && $scope.sqr7T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr7.value = " O "
-                $scope.sqr7T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr7 == " O " && $scope.sqr5 == " O " && $scope.sqr3T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr3.value = " O "
-                $scope.sqr3T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr1 == " O " && $scope.sqr3 == " O " && $scope.sqr2T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr2.value = " O "
-                $scope.sqr2T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr4 == " O " && $scope.sqr6 == " O " && $scope.sqr5T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr5.value = " O "
-                $scope.sqr5T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr7 == " O " && $scope.sqr9 == " O " && $scope.sqr8T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr8.value = " O "
-                $scope.sqr8T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr1 == " O " && $scope.sqr7 == " O " && $scope.sqr4T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr4.value = " O "
-                $scope.sqr4T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr2 == " O " && $scope.sqr8 == " O " && $scope.sqr5T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr5.value = " O "
-                $scope.sqr5T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr3 == " O " && $scope.sqr9 == " O " && $scope.sqr6T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr6.value = " O "
-                $scope.sqr6T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr1 == " O " && $scope.sqr5 == " O " && $scope.sqr9T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr9.value = " O "
-                $scope.sqr9T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr4 == " O " && $scope.sqr7 == " O " && $scope.sqr1T == 0 && $scope.turn == 1)
-            {
-                document.tic.$scope.sqr1.value = " O "
-                $scope.sqr1T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr5 == " O " && $scope.sqr8 == " O " && $scope.sqr2T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr2.value = " O "
-                $scope.sqr2T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr6 == " O " && $scope.sqr9 == " O " && $scope.sqr3T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr3.value = " O "
-                $scope.sqr3T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr1 == " O " && $scope.sqr4 == " O " && $scope.sqr7T == 0 && $scope.turn == 1)
-            {
-                document.tic.$scope.sqr7.value = " O "
-                $scope.sqr7T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr2 == " O " && $scope.sqr5 == " O " && $scope.sqr8T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr8.value = " O "
-                $scope.sqr8T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr3 == " O " && $scope.sqr6 == " O " && $scope.sqr9T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr9.value = " O "
-                $scope.sqr9T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr1 == " O " && $scope.sqr9 == " O " && $scope.sqr5T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr5.value = " O "
-                $scope.sqr5T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr3 == " O " && $scope.sqr7 == " O " && $scope.sqr5T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr5.value = " O "
-                $scope.sqr5T = 1;
-                $scope.turn = 0;
-            }
-            else
-            {
-                $scope.computer()
-            }
-            $scope.check2()
-        }
-        $scope.computer=function()
-        {
-            $scope.check2()
-            if($scope.sqr1 == " X " && $scope.sqr2 == " X " && $scope.sqr3T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr3.value = " O "
-                $scope.sqr3T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr2 == " X " && $scope.sqr3 == " X " && $scope.sqr1T == 0 && $scope.turn == 1)
-            {
-                document.tic.$scope.sqr1.value = " O "
-                $scope.sqr1T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr4 == " X " && $scope.sqr5 == " X " && $scope.sqr6T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr6.value = " O "
-                $scope.sqr6T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr5 == " X " && $scope.sqr6 == " X " && $scope.sqr4T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr4.value = " O "
-                $scope.sqr4T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr7 == " X " && $scope.sqr8 == " X " && $scope.sqr9T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr9.value = " O "
-                $scope.sqr9T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr8 == " X " && $scope.sqr9 == " X " && $scope.sqr7T == 0 && $scope.turn == 1)
-            {
-                document.tic.$scope.sqr7.value = " O "
-                $scope.sqr7T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr1 == " X " && $scope.sqr5 == " X " && $scope.sqr9T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr9.value = " O "
-                $scope.sqr9T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr5 == " X " && $scope.sqr9 == " X " && $scope.sqr1T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr1.value = " O "
-                $scope.sqr1T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr3 == " X " && $scope.sqr5 == " X " && $scope.sqr7T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr7.value = " O "
-                $scope.sqr7T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr7 == " X " && $scope.sqr5 == " X " && $scope.sqr3T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr3.value = " O "
-                $scope.sqr3T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr1 == " X " && $scope.sqr3 == " X " && $scope.sqr2T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr2.value = " O "
-                $scope.sqr2T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr4 == " X " && $scope.sqr6 == " X " && $scope.sqr5T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr5.value = " O "
-                $scope.sqr5T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr7 == " X " && $scope.sqr9 == " X " && $scope.sqr8T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr8.value = " O "
-                $scope.sqr8T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr1 == " X " && $scope.sqr7 == " X " && $scope.sqr4T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr4.value = " O "
-                $scope.sqr4T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr2 == " X " && $scope.sqr8 == " X " && $scope.sqr5T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr5.value = " O "
-                $scope.sqr5T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr3 == " X " && $scope.sqr9 == " X " && $scope.sqr6T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr6.value = " O "
-                $scope.sqr6T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr1 == " X " && $scope.sqr5 == " X " && $scope.sqr9T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr9.value = " O "
-                $scope.sqr9T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr4 == " X " && $scope.sqr7 == " X " && $scope.sqr1T == 0 && $scope.turn == 1)
-            {
-                document.tic.$scope.sqr1.value = " O "
-                $scope.sqr1T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr5 == " X " && $scope.sqr8 == " X " && $scope.sqr2T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr2.value = " O "
-                $scope.sqr2T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr6 == " X " && $scope.sqr9 == " X " && $scope.sqr3T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr3.value = " O "
-                $scope.sqr3T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr1 == " X " && $scope.sqr4 == " X " && $scope.sqr7T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr7.value = " O "
-                $scope.sqr7T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr2 == " X " && $scope.sqr5 == " X " && $scope.sqr8T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr8.value = " O "
-                $scope.sqr8T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr3 == " X " && $scope.sqr6 == " X " && $scope.sqr9T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr9.value = " O "
-                $scope.sqr9T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr1 == " X " && $scope.sqr9 == " X " && $scope.sqr5T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr5.value = " O "
-                $scope.sqr5T = 1;
-                $scope.turn = 0;
-            }
-            else if($scope.sqr3 == " X " && $scope.sqr7 == " X " && $scope.sqr5T == 0 && $scope.turn == 1)
-            {
-                document.tic.sqr5.value = " O "
-                $scope.sqr5T = 1;
-                $scope.turn = 0;
-            }
-            else
-            {
-                $scope.AI()
-            }
-            $scope.check2()
-        }
-
-        $scope.AI =function()
-        {
-            $scope.vari()
-            if(document.tic.sqr5.value == "     " && $scope.turn == 1)
-            {
-                document.tic.sqr5.value = " O "
-                $scope.turn = 0
-                $scope.sqr5T = 1
-            }
-            else if(document.tic.$scope.sqr1.value == "     " && $scope.turn == 1)
-            {
-                document.tic.$scope.sqr1.value = " O "
-                $scope.turn = 0
-                $scope.sqr1T = 1
-            }
-            else if(document.tic.sqr9.value == "     " && $scope.turn == 1)
-            {
-                document.tic.sqr9.value = " O "
-                $scope.turn = 0
-                $scope.sqr9T = 1
-            }
-            else if(document.tic.sqr6.value == "     " && $scope.turn == 1)
-            {
-                document.tic.sqr6.value = " O "
-                $scope.turn = 0
-                $scope.sqr6T = 1
-            }
-            else if(document.tic.sqr2.value == "     " && $scope.turn == 1)
-            {
-                document.tic.sqr2.value = " O "
-                $scope.turn = 0
-                $scope.sqr2T = 1
-            }
-            else if(document.tic.sqr8.value == "     " && $scope.turn == 1)
-            {
-                document.tic.sqr8.value = " O "
-                $scope.turn = 0
-                $scope.sqr8T = 1
-            }
-            else if(document.tic.sqr3.value == "     " && $scope.turn == 1)
-            {
-                document.tic.sqr3.value = " O "
-                $scope.turn = 0
-                $scope.sqr3T = 1
-            }
-            else if(document.tic.sqr7.value == "     " && $scope.turn == 1)
-            {
-                document.tic.sqr7.value = " O "
-                $scope.turn = 0
-                $scope.sqr7T = 1
-            }
-            else if(document.tic.sqr4.value == "     " && $scope.turn == 1)
-            {
-                document.tic.sqr4.value = " O "
-                $scope.turn = 0
-                $scope.sqr4T = 1
-            }
-            $scope.check2()
-        }
-
-        $scope.reset=function()
-        {
-            document.tic.$scope.sqr1.value = "     "
-            document.tic.sqr2.value = "     "
-            document.tic.sqr3.value = "     "
-            document.tic.sqr4.value = "     "
-            document.tic.sqr5.value = "     "
-            document.tic.sqr6.value = "     "
-            document.tic.sqr7.value = "     "
-            document.tic.sqr8.value = "     "
-            document.tic.sqr9.value = "     "
-            $scope.sqr1T = 0
-            $scope.sqr2T = 0
-            $scope.sqr3T = 0
-            $scope.sqr4T = 0
-            $scope.sqr5T = 0
-            $scope.sqr6T = 0
-            $scope.sqr7T = 0
-            $scope.sqr8T = 0
-            $scope.sqr9T = 0
-            $scope.vari()
-            $scope.turn = 0
-            $scope.moveCount = 0
-        }
-
-        $scope.resetter=function()
-        {
-            $scope.reset()
-        }
+        $scope.prepareBoard(3);
 
 
 

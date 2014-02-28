@@ -1,7 +1,33 @@
-<div>
+<div class="airbnb">
 
 
-    <h1>AirBNB</h1>
+    <div class="tablecontainer">
+
+        <table  class="table table-bordered table-condensed" data-table-name="">
+            <thead>
+            <tr>
+
+                <th ng-repeat="headerdate in headerdata">{{headerdate}}</th>
+            </tr>
+
+            </thead>
+            <tbody id="airbnbtablebody">
+            <tr >
+            </tr>
+            <tr></tr>
+            <tr></tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="resultscontainer">
+        <div><label>FromDate: </label> <input id="toDate" type="text"/> <label>ToDate: </label><input id="fromDate" type="text"/>
+            <button id="hostingsBtn" ng-click="onhostclick()">GetHostings</button> <button ng-click="reset()">Reset</button></div>
+        <div id="resultDiv"> <label>Results: </label> <label id="results"></label></div>
+
+    </div>
 
 
 </div>
